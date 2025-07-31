@@ -20,8 +20,8 @@ body {
 }
 
 .dot-mask {
-  background-color: white;
-  opacity: 0;
+  background-color: oklch(98.7% 0.022 95.277);
+  opacity: 1;
   background-image: radial-gradient(#ddd 1.35px, white 1.35px);
   background-size: 27px 27px;
 }
