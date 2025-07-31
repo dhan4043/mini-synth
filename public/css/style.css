@@ -22,7 +22,7 @@ body {
 .dot-mask {
   background-color: oklch(98.7% 0.022 95.277);
   opacity: 1;
-  background-image: radial-gradient(#ddd 1.35px, white 1.35px);
+  background-image: radial-gradient(#ddd 1.35px, oklch(98.7% 0.022 95.277) 1.35px);
   background-size: 27px 27px;
 }
 
