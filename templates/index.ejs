@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mini Synth</title>
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/nexusui@latest/dist/NexusUI.js"></script>
+  </head>
+  <body class="dot-mask">
+    <h1>minisynth</h1>
+    <div id="synth">
+      <div id="osc-module">
+        <table>
+          <tr>
+            <td><label>oscilloscope</label></td>
+          </tr>
+          <tr>
+            <td><div id="osc"></div></td>
+          </tr>
+        </table>
+      </div>
+      <div id="control-module">
+        <table>
+          <tr>
+            <td class="labels">
+              <p>sin</p>
+              <p>sqr</p>
+              <p>saw</p>
+              <p>tri</p>
+            </td>
+          </tr>
+          <tr>
+            <td><div id="wave"></div></td>
+          </tr>
+          <tr><td><br></td></tr>
+          <tr>
+            <td><label>volume</label></td>
+          </tr>
+          <tr>
+            <td><div id="vol"></div></td>
+          </tr>
+        </table>
+      </div>
+      <div id="env-module">
+        <table>
+          <tr>
+            <td class="labels">
+              <p>atk</p>
+              <p>dec</p>
+              <p>sus</p>
+              <p>rel</p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div id="env"></div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="preset-module">
+        <table>
+          <tr>
+            <td><label>load patch</label></td>
+          </tr>
+          <tr>
+            <td>
+              <form action="/load" method="post">
+                <input id="load" name="load" type="text" placeholder="name" required>
+                <div class="buttons">
+                  <input type="reset" value="clear">
+                  <input type="submit" value="load">
+                </div>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td><label>delete patch</label></td>
+          </tr>
+          <tr>
+            <td>
+              <form action="/delete" method="post">
+                <input id="delete" name="delete" type="text" placeholder="name" required>
+                <div class="buttons">
+                  <input type="reset" value="clear">
+                  <input type="submit" value="delete">
+                </div>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td><label>save patch</label></td>
+          </tr>
+          <tr>
+            <td>
+              <form action="/add" method="post">
+                <input id="add" name="add" type="text" placeholder="name" required>
+                <input id="savedAdsr" name="savedAdsr" type="text" value="<%= patch.adsr %>" hidden>
+                <input id="savedWaveform" name="savedWaveform" type="text" value="<%= patch.waveform %>" hidden>
+                <input id="savedVolume" name="savedVolume" type="text" value="<%= patch.volume %>" hidden>
+                <div class="buttons">
+                  <input type="reset" value="clear">
+                  <input type="submit" value="save">
+                </div>
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <td><label>octave</label></td>
+          </tr>
+          <tr>
+            <td><div id="octave">3</div></td>
+          </tr>
+          <tr>
+            <td><label>patch</label></td>
+          </tr>
+          <tr>
+            <td><div id="patch"><%= patch.name %></div></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script src="js/synth.js"></script>
+  <script>
+    // Variables described in the synth.js file
+    let adsr = '<%= patch.adsr %>';
+    let waveformIndex = '<%= patch.waveform %>';
+    envelopeSelector.setAllSliders(adsr.split(","));
+    waveformSelector.select(parseInt(waveformIndex));
+    volumeSlider.value = '<%= patch.volume %>';
+  </script>
+</html>
